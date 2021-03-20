@@ -44,16 +44,21 @@ class _CalcAppState extends State<CalcApp> {
   }
 
   void operation(String text) {
-    if (expression == "=") {
+    if (text == "=") {
       expression = equation;
       expression = expression.replaceAll("x", "*");
       expression = expression.replaceAll("÷", "/");
-      Parser p = Parser();
-      Expression exp = p.parse(expression);
-      ContextModel cm = ContextModel();
-      result = exp.evaluate(EvaluationType.REAL, cm);
-      setState(() {});
-      result = expression;
+      try {
+        Parser p = Parser();
+        Expression exp = p.parse(expression);
+        ContextModel cm = ContextModel();
+        result = (exp.evaluate(EvaluationType.REAL, cm)).toString();
+        setState(() {
+          result = (exp.evaluate(EvaluationType.REAL, cm)).toString();
+        });
+      } catch (e) {
+        result = "Error";
+      }
     }
   }
 
