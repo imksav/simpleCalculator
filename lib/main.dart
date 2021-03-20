@@ -15,13 +15,15 @@ class _CalcAppState extends State<CalcApp> {
   String result = "0";
   String equation = "0";
 
-  void numClick(String text) {
+  String numClick(String text) {
     setState(() {
       if (equation == "0") {
         equation = text;
+      } else {
+        equation += text;
       }
-      equation += text;
     });
+    return equation;
   }
 
   void clearAll(String text) {
@@ -68,10 +70,10 @@ class _CalcAppState extends State<CalcApp> {
       debugShowCheckedModeBanner: false,
       title: "Simple Calculator",
       home: Scaffold(
-        appBar: AppBar(
-          title: Text("Simple Calculator"),
-          centerTitle: true,
-        ),
+        // appBar: AppBar(
+        //   title: Text("Simple Calculator"),
+        //   centerTitle: true,
+        // ),
         backgroundColor: Colors.blueGrey,
         body: Center(
           child: Padding(
@@ -81,7 +83,7 @@ class _CalcAppState extends State<CalcApp> {
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 Container(
-                  padding: EdgeInsets.only(right: 15),
+                  padding: EdgeInsets.all(15),
                   child: Text(
                     "$equation",
                     style: GoogleFonts.rubik(
